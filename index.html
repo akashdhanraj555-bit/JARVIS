@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JARVIS Love Interface</title>
+
+<style>
+body{
+    margin:0;
+    background:#000;
+    color:#00e5ff;
+    font-family:Arial,sans-serif;
+    overflow:hidden;
+}
+.jarvis{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    flex-direction:column;
+    text-align:center;
+}
+.box{
+    border:2px solid #00e5ff;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 0 20px #00e5ff;
+    background:rgba(0,0,0,0.8);
+}
+input,textarea{
+    width:250px;
+    padding:10px;
+    margin:10px;
+    border:none;
+    border-radius:10px;
+}
+button{
+    padding:10px 20px;
+    margin:10px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+}
+.yes{background:#00ff88;}
+.no{background:red;color:white;}
+.hidden{display:none;}
+h1{
+    text-shadow:0 0 20px #00e5ff;
+}
+</style>
+</head>
+
+<body>
+
+<div class="jarvis" id="login">
+<div class="box">
+<h1>J.A.R.V.I.S ACCESS</h1>
+<p>Enter Password</p>
+<input type="password" id="pass">
+<br>
+<button onclick="checkPass()">Unlock</button>
+</div>
+</div>
+
+<div class="jarvis hidden" id="question1">
+<div class="box">
+<h1>Do You Love Me? ❤️</h1>
+<button class="yes" onclick="yesLove()">YES</button>
+<button class="no" id="noBtn">NO</button>
+</div>
+</div>
+
+<div class="jarvis hidden" id="question2">
+<div class="box">
+<h1>Why Do You Love Me?</h1>
+<textarea id="answer" rows="5"></textarea>
+<br>
+<button onclick="showFinal()">Submit</button>
+</div>
+</div>
+
+<div class="jarvis hidden" id="final">
+<div class="box">
+<h1>Hello My Love ❤️</h1>
+<h2>I Love You 3000 Betu 💖</h2>
+<p id="showAnswer"></p>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+function checkPass(){
+let pass=document.getElementById("pass").value;
+
+if(pass.toLowerCase()=="i am iron man"){
+document.getElementById("login").classList.add("hidden");
+document.getElementById("question1").classList.remove("hidden");
+}else{
+alert("Access Denied!");
+}
+}
+
+document.getElementById("noBtn").addEventListener("mouseover",()=>{
+let x=Math.random()*window.innerWidth;
+let y=Math.random()*window.innerHeight;
+document.getElementById("noBtn").style.position="absolute";
+document.getElementById("noBtn").style.left=x+"px";
+document.getElementById("noBtn").style.top=y+"px";
+});
+
+function yesLove(){
+confetti({
+particleCount:300,
+spread:200,
+origin:{y:0.6}
+});
+
+document.getElementById("question1").classList.add("hidden");
+document.getElementById("question2").classList.remove("hidden");
+}
+
+function showFinal(){
+let ans=document.getElementById("answer").value;
+
+document.getElementById("question2").classList.add("hidden");
+document.getElementById("final").classList.remove("hidden");
+
+document.getElementById("showAnswer").innerHTML=
+"Your Answer: ❤️ " + ans;
+}
+</script>
+
+</body>
+</html>
